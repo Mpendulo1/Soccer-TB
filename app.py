@@ -5,7 +5,7 @@ import sqlite3
 from sqlite3.dbapi2 import Cursor
 
 from flask import Flask, json, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from werkzeug.wrappers import response
 
 
@@ -108,6 +108,7 @@ CORS(app)
 
 
 @app.route('/', methods=['GET'])
+@cross_origin
 def welcome():
     response = {}
     if request.method == 'GET':
@@ -118,6 +119,7 @@ def welcome():
 
 # This is my route to register  user
 @app.route('/register', methods=['POST'])
+@cross_origin
 def user_registration():
     response = {}
     firstname = request.form['firstname']
@@ -153,6 +155,7 @@ def user_registration():
 # This is my route for user login
 
 @app.route('/user-login', methods=['PATCH'])
+@cross_origin
 def user_login():
     response = {}
     if request.method == "PATCH":
@@ -182,6 +185,7 @@ def user_login():
 
 # This is my route for an admin registration
 @app.route('/admin', methods=['POST'])
+@cross_origin
 def admin_registration():
     response = {}
     firstname = request.form['first_name']
@@ -217,6 +221,7 @@ def admin_registration():
 
 # This is my route for a player registration
 @app.route('/player-registration', methods=['POST'])
+@cross_origin
 def player_registraion():
     response = {}
     firstname = request.form['firstname']
@@ -264,6 +269,7 @@ def player_registraion():
 
 # This is my route for  a user registration
 @app.route('/scouter-registration', methods=['POST'])
+@cross_origin
 def scouter_profile():
     response = {}
     firstname = request.form['firstname']
@@ -292,6 +298,7 @@ def scouter_profile():
 
 
 @app.route('/update-user/<int:userId>', methods=['PUT'])
+@cross_origin
 def update_user(userId):
     response = {}
 
@@ -356,6 +363,7 @@ def update_user(userId):
 
 # This is my route for updating the player profile
 @app.route('/update-player/<int:player_id>', methods=['PUT'])
+@cross_origin
 def update_player_profile(player_id):
     response = {}
 
@@ -527,6 +535,7 @@ def update_player_profile(player_id):
 
 # This is my route for updating the scouter profile
 @app.route('/update-scouter/<int:scouter_id>', methods=["PUT"])
+@cross_origin
 def update_scouter_profile(scouter_id):
     response = {}
 
@@ -616,6 +625,7 @@ def update_scouter_profile(scouter_id):
 
 
 @app.route('/delete-profile/<int:userId>', methods=['DELETE'])
+@cross_origin
 def remove_user_profile(userId):
     response = {}
     if request.method == 'DELETE':
@@ -634,6 +644,7 @@ def remove_user_profile(userId):
 
 # This is my route for deleting a player profile
 @app.route('/delete-player/<int:player_id>', methods=['DELETE'])
+@cross_origin
 def remove_player_profile(player_id):
     response = {}
     if request.method == 'DELETE':
@@ -653,6 +664,7 @@ def remove_player_profile(player_id):
 
 # This is my route for deleting a scouter profile
 @app.route('/delete-scouter/<int:scouter_id>', methods=['DELETE'])
+@cross_origin
 def remove_scouter_profile(scouter_id):
     response = {}
     if request.method == 'DELETE':
@@ -674,6 +686,7 @@ def remove_scouter_profile(scouter_id):
 
 
 @app.route('/user-profiles', methods=['GET'])
+@cross_origin
 def view_user_profiles():
     response = {}
 
@@ -690,6 +703,7 @@ def view_user_profiles():
 
 
 @app.route('/user-profile/<int:userId>', methods=['GET'])
+@cross_origin
 def view_user_profile(userId):
     response = {}
     with sqlite3.connect('football.db') as conn:
@@ -705,6 +719,7 @@ def view_user_profile(userId):
 # ------------------------------Scouter Routes------------------------------------------------
 # This is my route for viewing all scouter profiles
 @app.route('/scouter-profiles', methods=['GET'])
+@cross_origin
 def view_scouter_profiles():
     response = {}
 
@@ -720,6 +735,7 @@ def view_scouter_profiles():
 
 # This is my route for viewing a scouter profile
 @app.route('/scouter-profile/<int:scouter_id>', methods=['GET'])
+@cross_origin
 def view_scouter_profile(scouter_id):
     response = {}
 
@@ -740,6 +756,7 @@ def view_scouter_profile(scouter_id):
 # --------------------------------- Player Profile----------------------------------------------------
 #  This is my route for viewing All player Profiles
 @app.route('/player-profiles', methods=['GET'])
+@cross_origin
 def view_player_profiles():
     response = {}
 
@@ -755,6 +772,7 @@ def view_player_profiles():
 
 # This is my route for viewing a player profile
 @app.route('/player-profile/<int:player_id>', methods=['GET'])
+@cross_origin
 def view_player_profile(player_id):
     response = {}
 
